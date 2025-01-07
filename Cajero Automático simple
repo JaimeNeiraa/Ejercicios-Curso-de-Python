@@ -1,0 +1,50 @@
+def iniciar_sesion():
+    usuario=input("Introduce tu usuario: ")
+    contraseña=(input("Introduce tu contraseña: "))
+    if usuario=="admin" and contraseña=="1234":
+        return True,"El acceso ha sido exitoso"
+    else:
+        return False, "ERROR,la combinación de usuario y contraseña es incorrecto"
+def mostrar_saldo(saldo):
+    return saldo
+def retirar_dinero(saldo):
+    monto=int(input("Elige el monto que deseas retirar: "))
+    if monto>saldo:
+        return f"No hay fondos suficientes, tu saldo es: {saldo}"
+    else:
+        saldo-=monto
+        return saldo,f"La operación se ha llevado a cabo con éxito, tu saldo actual es : {saldo}"
+def depositar_dinero(saldo):
+    monto = int(input("Elige el monto que deseas ingresar: "))
+    if monto<=0:
+        return saldo, "El monto debe ser mayor a cero"
+    else:
+        saldo+=monto
+    return saldo,f"Operación llevada a cabo con éxito. Tu nuevo saldo es: {saldo}"
+def menu_principal():
+    saldo=1000
+    print("Bienvenido al cajero automático")
+
+    acceso,mensaje=iniciar_sesion()
+    print(mensaje)
+    if not acceso:
+        return #Finalizar si no inicia sesion
+    while True:
+        #Menu principal
+        opcion=int(input("1: Consultar el saldo\n2:Retirar dinero\n3:Ingresar dinero\n4:Salir del Cajero\nElige una opción a realizar: "))
+        match(opcion):
+            case 1:
+                mostrar_saldo(saldo)
+            case 2:
+                saldo,mensaje= retirar_dinero(saldo)
+                print(mensaje)
+            case 3:
+                saldo,mensaje= depositar_dinero(saldo)
+                print(mensaje)
+            case 4:
+                print("Gracias por usar el cajero")
+                break
+            case _:
+                print("Opción no válida")
+                return
+menu_principal()
