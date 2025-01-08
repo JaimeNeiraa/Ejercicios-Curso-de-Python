@@ -10,7 +10,7 @@ def mostrar_saldo(saldo):
 def retirar_dinero(saldo):
     monto=int(input("Elige el monto que deseas retirar: "))
     if monto>saldo:
-        return f"No hay fondos suficientes, tu saldo es: {saldo}"
+        return saldo,f"No hay fondos suficientes, tu saldo es: {saldo}"
     else:
         saldo-=monto
         return saldo,f"La operación se ha llevado a cabo con éxito, tu saldo actual es : {saldo}"
@@ -35,6 +35,7 @@ def menu_principal():
         match(opcion):
             case 1:
                 mostrar_saldo(saldo)
+                print(saldo)
             case 2:
                 saldo,mensaje= retirar_dinero(saldo)
                 print(mensaje)
